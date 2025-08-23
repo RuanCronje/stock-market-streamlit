@@ -1,0 +1,11 @@
+streamlit
+numpy==2.1.1
+pandas==2.2.2
+plotly
+free_proxy
+streamlit-javascript==0.1.5
+python-dotenv
+curl_cffi
+alpha_vantage
+certifi
+python-dotenv'

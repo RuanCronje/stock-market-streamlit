@@ -1,0 +1,23 @@
+
+"Meta Data":{
+"1. Information":"Monthly Prices (open, high, low, close) and Volumes"
+"2. Symbol":"MSFT"
+"3. Last Refreshed":"2025-08-22"
+"4. Time Zone":"US/Eastern"
+}
+"Monthly Time Series":{
+"2025-08-22":{
+"1. open":"535.0000"
+"2. high":"538.2500"
+"3. low":"502.4100"
+"4. close":"507.2300"
+"5. volume":"346180894"
+}
+"2025-07-31":{
+"1. open":"496.4700"
+"2. high":"555.4500"
+"3. low":"488.7000"
+"4. close":"533.5000"
+"5. volume":"396888800"
+}
+}
