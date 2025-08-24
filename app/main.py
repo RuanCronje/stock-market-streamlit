@@ -10,6 +10,9 @@ import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 import datetime
 
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Settings
 load_dotenv(override=True)
 API_KEY = os.environ["ALPHAVANTAGE_API_KEY"]
 
@@ -38,8 +41,8 @@ period_list = [
 ]
 
 # ---------------------------------------------------------------------------------------------------------------------
-# WARNING: Disable SSL
-
+# WARNING: Disabled SSL
+# Workaround for SSL not woking on home laptop
 try:
     # Suppress insecure request warnings
     urllib3.disable_warnings(InsecureRequestWarning)
@@ -58,9 +61,10 @@ def _request_no_verify(self, method, url, **kwargs):
 
 
 requests.Session.request = _request_no_verify
+
+
 # ---------------------------------------------------------------------------------------------------------------------
-
-
+# Fetch stock data
 def fetch_data(symbol, interval):
 
     # Get the symbol from the selected stock
@@ -92,6 +96,7 @@ def fetch_data(symbol, interval):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
+# Create candlestick chart
 def create_candlestick_chart(data, symbol, interval, period):
     """Create candlestick chart for different time intervals and periods"""
     try:
@@ -181,6 +186,8 @@ st.set_page_config(
     initial_sidebar_state="auto",
 )
 
+# ---------------------------------------------
+# sidebar
 with st.sidebar:
 
     selected_stock = st.selectbox(
@@ -222,8 +229,8 @@ st.html(
 )
 
 
-# Fetch and display data
-
+# ---------------------------------------------
+# Main Content
 with st.spinner(f"Fetching data for {selected_stock}..."):
 
     result = fetch_data(selected_stock, selected_interval)
@@ -241,6 +248,8 @@ with st.spinner(f"Fetching data for {selected_stock}..."):
             else:
                 st.text("Last Refresh: Never")
 
+        # ---------------------------------------------
+        # Stock Information
         st.title(f"{selected_stock}")
         st.subheader(f"Symbol: {data_overview['Symbol']}")
 
@@ -256,7 +265,8 @@ with st.spinner(f"Fetching data for {selected_stock}..."):
             with col2:
                 st.write(f"Asset Type: {data_overview['Description']}")
 
-        # Create and display candlestick chart
+        # ---------------------------------------------
+        # Candle Stick Chart
         fig = create_candlestick_chart(
             data_market, data_overview["Symbol"], selected_interval, selected_period
         )
